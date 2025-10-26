@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">EasyLearnLanguage</string>
+    <string name="title_new_group">Neue Gruppe</string>
+    <string name="title_play">Spielen</string>
+    <string name="title_new_words">Neue Wörter</string>
+    <string name="title_correct">Korrigieren</string>
+    <string name="settings">Einstellungen</string>
+    <string name="lang">Sprache</string>
+    <string name="theme">Design</string>
+    <string name="system_default">Systemstandard</string>
+    <string name="english">English</string>
+    <string name="ukrainian">Українська</string>
+    <string name="german">Deutsch</string>
+    <string name="dark_mode">Dunkles Design</string>
+    <string name="restart_hint">Änderungen gelten sofort</string>
+</resources>

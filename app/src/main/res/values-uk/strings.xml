@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">EasyLearnLanguage</string>
+    <string name="title_new_group">Нова група</string>
+    <string name="title_play">Грати</string>
+    <string name="title_new_words">Нові слова</string>
+    <string name="title_correct">Коригувати</string>
+    <string name="settings">Налаштування</string>
+    <string name="lang">Мова</string>
+    <string name="theme">Тема</string>
+    <string name="system_default">Як у системі</string>
+    <string name="english">English</string>
+    <string name="ukrainian">Українська</string>
+    <string name="german">Deutsch</string>
+    <string name="dark_mode">Темна тема</string>
+    <string name="restart_hint">Зміни застосовуються одразу</string>
+</resources>
