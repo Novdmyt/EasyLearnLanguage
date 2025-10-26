@@ -16,6 +16,10 @@
     <string name="add_word">Wort hinzufügen</string>
     <string name="word_front">Wort / Satz</string>
     <string name="word_back">Übersetzung</string>
+    <string name="group_deleted">Gruppe gelöscht</string>
+    <string name="undo">Rückgängig</string>
+    <string name="lang_from">Sprache des Wortes</string>
+    <string name="lang_to">Sprache der Übersetzung</string>
 
 
     <string name="coming_soon">В розробці</string>

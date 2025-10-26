@@ -16,8 +16,15 @@
     <string name="add_word">Add word</string>
     <string name="word_front">Word / sentence</string>
     <string name="word_back">Translation</string>
+    <string name="group_deleted">Group deleted</string>
+    <string name="undo">Undo</string>
+    <string name="lang_from">Word language</string>
+    <string name="lang_to">Translation language</string>
+
+
 
     <string name="coming_soon">В розробці</string>
+
 
     <string name="color">Color</string>
     <string name="color_none">No color</string>

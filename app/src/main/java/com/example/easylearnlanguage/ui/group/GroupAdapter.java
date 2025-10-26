@@ -33,6 +33,22 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.VH> {
         View view = LayoutInflater.from(p.getContext()).inflate(R.layout.item_group, p, false);
         return new VH(view);
     }
+    public Group getItem(int position) {           // ДОДАНО
+        return (position >= 0 && position < items.size()) ? items.get(position) : null;
+    }
+
+    public void removeAt(int position) {           // ДОДАНО (локальне прибрання для плавності)
+        if (position >= 0 && position < items.size()) {
+            items.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void restoreAt(int position, Group g) { // ДОДАНО (для Undo)
+        if (position < 0 || position > items.size()) position = items.size();
+        items.add(position, g);
+        notifyItemInserted(position);
+    }
 
     @Override public void onBindViewHolder(@NonNull VH h, int pos){
         Group g = items.get(pos);
