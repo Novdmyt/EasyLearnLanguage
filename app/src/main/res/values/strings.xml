@@ -13,4 +13,11 @@
     <string name="german">Deutsch</string>
     <string name="dark_mode">Dark mode</string>
     <string name="restart_hint">Changes apply instantly</string>
+
+    <string name="color">Color</string>
+    <string name="color_none">No color</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_yellow">Yellow</string>
+    <string name="color_red">Red</string>
+    <string name="color_green">Green</string>
 </resources>

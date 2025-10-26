@@ -1,9 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">EasyLearnLanguage</string>
+
+    <!-- Головне меню -->
     <string name="title_new_group">Нова група</string>
     <string name="title_play">Грати</string>
     <string name="title_new_words">Нові слова</string>
     <string name="title_correct">Коригувати</string>
+
+    <!-- Налаштування -->
     <string name="settings">Налаштування</string>
     <string name="lang">Мова</string>
     <string name="theme">Тема</string>
@@ -13,4 +18,12 @@
     <string name="german">Deutsch</string>
     <string name="dark_mode">Темна тема</string>
     <string name="restart_hint">Зміни застосовуються одразу</string>
+
+    <!-- Додавання групи: вибір кольору -->
+    <string name="color">Колір</string>
+    <string name="color_none">Без кольору</string>
+    <string name="color_blue">Синій</string>
+    <string name="color_yellow">Жовтий</string>
+    <string name="color_red">Червоний</string>
+    <string name="color_green">Зелений</string>
 </resources>

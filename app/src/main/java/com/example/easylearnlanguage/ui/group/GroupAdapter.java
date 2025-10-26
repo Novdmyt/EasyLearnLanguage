@@ -4,10 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.easylearnlanguage.R;
 import com.example.easylearnlanguage.data.Group;
+import com.google.android.material.card.MaterialCardView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,18 +37,28 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.VH> {
     @Override public void onBindViewHolder(@NonNull VH h, int pos){
         Group g = items.get(pos);
         h.title.setText(g.title);
-        h.lang.setText(g.fromLang + " → " + g.toLang);
+
+        // якщо колір заданий (не 0), фарбуємо фон картки
+        if (g.color != 0) {
+            h.card.setCardBackgroundColor(g.color);
+        } else {
+            // повернути дефолтний (на випадок reuse ViewHolder)
+            h.card.setCardBackgroundColor(
+                    h.card.getContext().getColor(android.R.color.transparent));
+        }
+
         h.itemView.setOnClickListener(v -> cb.onClick(g));
     }
 
     @Override public int getItemCount(){ return items.size(); }
 
     static class VH extends RecyclerView.ViewHolder{
-        TextView title, lang;
+        MaterialCardView card;
+        TextView title;
         VH(@NonNull View itemView){
             super(itemView);
+            card  = (MaterialCardView) itemView;
             title = itemView.findViewById(R.id.tvTitle);
-            lang  = itemView.findViewById(R.id.tvLang);
         }
     }
 }

@@ -16,6 +16,7 @@ import com.example.easylearnlanguage.data.Group;
 import com.example.easylearnlanguage.ui.group.GroupAdapter;
 import com.example.easylearnlanguage.ui.group.GroupViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
 public class NewGroupActivity extends AppCompatActivity {
 
@@ -46,22 +47,47 @@ public class NewGroupActivity extends AppCompatActivity {
     private void showAddDialog(){
         var view = LayoutInflater.from(this).inflate(R.layout.dialog_add_group, null, false);
         EditText etTitle = view.findViewById(R.id.etTitle);
-        EditText etFrom  = view.findViewById(R.id.etFrom);
-        EditText etTo    = view.findViewById(R.id.etTo);
+        MaterialAutoCompleteTextView dropColor = view.findViewById(R.id.dropColor);
+
+        // Мітки та кольори (перший пункт — "Без кольору")
+        String[] labels = new String[] {
+                getString(R.string.color_none),
+                getString(R.string.color_blue),
+                getString(R.string.color_yellow),
+                getString(R.string.color_red),
+                getString(R.string.color_green)
+        };
+        int[] values = new int[] {
+                0,
+                getColor(R.color.blue),
+                getColor(R.color.yellow),
+                getColor(R.color.red),
+                getColor(R.color.green)
+        };
+        dropColor.setSimpleItems(labels);
+        dropColor.setText(labels[0], false);
 
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.title_new_group))
                 .setView(view)
                 .setPositiveButton(android.R.string.ok, (d, w) -> {
                     String title = etTitle.getText().toString().trim();
-                    String from  = etFrom.getText().toString().trim();
-                    String to    = etTo.getText().toString().trim();
-                    if (title.isEmpty()) { etTitle.setError("Required"); return; }
-                    if (from.isEmpty())  from = "DE";
-                    if (to.isEmpty())    to = "UK";
-                    vm.add(title, from, to, 0xFF4BA3E3); // тимчасовий колір
+                    if (title.isEmpty()) {
+                        Toast.makeText(this, R.string.title_new_group, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    // вибраний індекс
+                    int idx = 0;
+                    String chosen = dropColor.getText().toString();
+                    for (int i = 0; i < labels.length; i++) if (labels[i].equals(chosen)) { idx = i; break; }
+
+                    int color = values[idx];
+
+                    // тимчасово не питаємо мови — кладемо порожні значення
+                    vm.add(title, "", "", color);
                 })
                 .setNegativeButton(android.R.string.cancel, null)
                 .show();
     }
+
 }
