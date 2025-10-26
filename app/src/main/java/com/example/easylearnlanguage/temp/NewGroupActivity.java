@@ -1,5 +1,6 @@
 package com.example.easylearnlanguage.temp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
@@ -40,8 +41,10 @@ public class NewGroupActivity extends AppCompatActivity {
     }
 
     private void onGroupClick(Group g){
-        Toast.makeText(this, "Open group: " + g.title, Toast.LENGTH_SHORT).show();
-        // TODO: перейти на екран слів певної групи
+        Intent it = new Intent(this, com.example.easylearnlanguage.ui.word.WordsActivity.class);
+        it.putExtra(com.example.easylearnlanguage.ui.word.WordsActivity.EXTRA_GROUP_ID, g.id);
+        it.putExtra(com.example.easylearnlanguage.ui.word.WordsActivity.EXTRA_GROUP_TITLE, g.title);
+        startActivity(it);
     }
 
     private void showAddDialog(){

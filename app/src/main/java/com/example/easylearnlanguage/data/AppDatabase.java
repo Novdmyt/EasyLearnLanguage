@@ -1,19 +1,19 @@
 package com.example.easylearnlanguage.data;
 
 import android.content.Context;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 @Database(
-        entities = { Group.class },
-        version = 2,                 // підняли версію після зміни схеми
+        entities = { Group.class, Word.class },
+        version = 3,
         exportSchema = false
 )
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract GroupDao groupDao();
+    public abstract WordDao wordDao();
 
     private static volatile AppDatabase INSTANCE;
 
@@ -26,7 +26,7 @@ public abstract class AppDatabase extends RoomDatabase {
                                     AppDatabase.class,
                                     "easylearn.db"
                             )
-                            // На етапі розробки: якщо версія зросте, БД перебудується наново
+                            // Поки розробка — перезбираємо схему при зміні версії
                             .fallbackToDestructiveMigration()
                             .build();
                 }

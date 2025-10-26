@@ -4,74 +4,45 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.os.LocaleListCompat;
 
-import com.example.easylearnlanguage.settings.Prefs;
 import com.example.easylearnlanguage.settings.SettingsActivity;
-import com.example.easylearnlanguage.temp.CorrectActivity;
 import com.example.easylearnlanguage.temp.NewGroupActivity;
-import com.example.easylearnlanguage.temp.NewWordsActivity;
-import com.example.easylearnlanguage.temp.PlayActivity;
 import com.google.android.material.card.MaterialCardView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Prefs prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1) Ініціалізуємо Prefs після super.onCreate
-        prefs = new Prefs(this);
-
-        // 2) Застосовуємо тему
-        AppCompatDelegate.setDefaultNightMode(prefs.getNightMode());
-
-        // 3) Застосовуємо мову
-        String tag = prefs.getLangTag();
-        if ("system".equals(tag)) {
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList());
-        } else {
-            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(tag));
-        }
-
-        // 4) Підключаємо розмітку тільки після застосування теми/мови
-        setContentView(R.layout.activity_main);
-
-        // 5) Прив'язуємо в'ю і клік-логіку
         MaterialCardView tileNewGroup  = findViewById(R.id.tile_new_group);
         MaterialCardView tilePlay      = findViewById(R.id.tile_play);
         MaterialCardView tileNewWords  = findViewById(R.id.tile_new_words);
         MaterialCardView tileCorrect   = findViewById(R.id.tile_correct);
-        ImageButton btnSettings        = findViewById(R.id.btn_settings);
+        ImageButton      btnSettings   = findViewById(R.id.btn_settings);
 
-        View.OnClickListener nav = v -> {
-            int id = v.getId();
-            Class<?> target;
-            if (id == R.id.tile_new_group) {
-                target = NewGroupActivity.class;
-            } else if (id == R.id.tile_play) {
-                target = PlayActivity.class;
-            } else if (id == R.id.tile_new_words) {
-                target = NewWordsActivity.class;
-            } else {
-                target = CorrectActivity.class;
-            }
-            startActivity(new Intent(MainActivity.this, target));
-        };
+        // "Нова група" – список/створення груп
+        tileNewGroup.setOnClickListener(v ->
+                startActivity(new Intent(this, NewGroupActivity.class))
+        );
 
-        tileNewGroup.setOnClickListener(nav);
-        tilePlay.setOnClickListener(nav);
-        tileNewWords.setOnClickListener(nav);
-        tileCorrect.setOnClickListener(nav);
+        // "Нові слова" – теж відкриває список груп; натискаєш потрібну -> відкриваються слова
+        tileNewWords.setOnClickListener(v ->
+                startActivity(new Intent(this, NewGroupActivity.class))
+        );
+
+        // Поки заглушки
+        View.OnClickListener comingSoon = v ->
+                Toast.makeText(this, R.string.coming_soon, Toast.LENGTH_SHORT).show();
+        tilePlay.setOnClickListener(comingSoon);
+        tileCorrect.setOnClickListener(comingSoon);
 
         btnSettings.setOnClickListener(v ->
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class))
+                startActivity(new Intent(this, SettingsActivity.class))
         );
     }
 }
