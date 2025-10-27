@@ -25,6 +25,23 @@
     <string name="undo">Скасувати</string>
     <string name="lang_from">Мова слова</string>
     <string name="lang_to">Мова перекладу</string>
+    <string name="play_settings">Тренування</string>
+    <string name="tts_voice">Мова озвучки</string>
+    <string name="voice_english">Англійська</string>
+    <string name="voice_german">Німецька</string>
+    <string name="voice_french">Французька</string>
+
+    <string name="choices_count">Кількість варіантів</string>
+    <string name="choices_3">3</string>
+    <string name="choices_4">4</string>
+    <string name="choices_5">5</string>
+    <string name="choices_6">6</string>
+    <string name="correct">Вірно!</string>
+    <string name="incorrect">Спробуй ще</string>
+
+
+    <string name="need_more_words">Потрібно щонайменше %1$d слів, зараз %2$d</string>
+    <string name="add_word1">Додати слова</string>
 
 
     <string name="coming_soon">В розробці</string>

@@ -20,6 +20,23 @@
     <string name="undo">Rückgängig</string>
     <string name="lang_from">Sprache des Wortes</string>
     <string name="lang_to">Sprache der Übersetzung</string>
+    <string name="play_settings">Training</string>
+    <string name="tts_voice">Sprachstimme</string>
+    <string name="voice_english">Englisch</string>
+    <string name="voice_german">Deutsch</string>
+    <string name="voice_french">Französisch</string>
+
+    <string name="choices_count">Anzahl der Optionen</string>
+    <string name="choices_3">3</string>
+    <string name="choices_4">4</string>
+    <string name="choices_5">5</string>
+    <string name="choices_6">6</string>
+    <string name="correct">Richtig!</string>
+    <string name="incorrect">Versuch’s nochmal</string>
+
+    <string name="need_more_words">Потрібно щонайменше %1$d слів, зараз %2$d</string>
+    <string name="add_word1">Додати слова</string>
+
 
 
     <string name="coming_soon">В розробці</string>

@@ -15,6 +15,7 @@ import com.example.easylearnlanguage.R;
 import com.example.easylearnlanguage.data.Group;
 import com.example.easylearnlanguage.ui.group.GroupAdapter;
 import com.example.easylearnlanguage.ui.group.GroupViewModel;
+import com.example.easylearnlanguage.ui.play.PlayActivity;
 import com.example.easylearnlanguage.ui.word.WordsActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -24,6 +25,13 @@ public class NewGroupActivity extends AppCompatActivity {
 
     private GroupViewModel vm;
     private GroupAdapter adapter;
+
+    public static final String EXTRA_MODE  = "mode";
+    public static final String MODE_MANAGE = "manage";
+    public static final String MODE_WORDS  = "words";
+    public static final String MODE_PLAY   = "play";
+
+    private String mode = MODE_MANAGE;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,22 +44,30 @@ public class NewGroupActivity extends AppCompatActivity {
         adapter = new GroupAdapter(this::onGroupClick);
         list.setAdapter(adapter);
 
-        // Показуємо актуальні групи
         vm.groups().observe(this, adapter::submit);
 
-        // FAB додає НОВУ КАРТКУ-ГРУПУ
         FloatingActionButton fab = findViewById(R.id.fab_add);
         fab.setOnClickListener(v -> showAddDialog());
 
-        // Свайп-видалення з UNDO
         attachSwipeToDelete(list);
+
+        mode = getIntent().getStringExtra(EXTRA_MODE);
+        if (mode == null) mode = MODE_MANAGE;
     }
 
+    /** Клік по групі — маршрутизація за режимом */
     private void onGroupClick(Group g){
-        Intent it = new Intent(this, WordsActivity.class);
-        it.putExtra(WordsActivity.EXTRA_GROUP_ID, g.id);
-        it.putExtra(WordsActivity.EXTRA_GROUP_TITLE, g.title);
-        startActivity(it);
+        if (MODE_PLAY.equals(mode)) {
+            Intent it = new Intent(this, PlayActivity.class);
+            it.putExtra(PlayActivity.EXTRA_GROUP_ID, g.id);
+            it.putExtra(PlayActivity.EXTRA_GROUP_TITLE, g.title);
+            startActivity(it);
+        } else {
+            Intent it = new Intent(this, WordsActivity.class);
+            it.putExtra(WordsActivity.EXTRA_GROUP_ID, g.id);
+            it.putExtra(WordsActivity.EXTRA_GROUP_TITLE, g.title);
+            startActivity(it);
+        }
     }
 
     private void showAddDialog(){
@@ -81,14 +97,15 @@ public class NewGroupActivity extends AppCompatActivity {
                 .setView(view)
                 .setPositiveButton(android.R.string.ok, (d, w) -> {
                     String title = etTitle.getText().toString().trim();
-                    if (title.isEmpty()) { etTitle.setError(getString(R.string.title_new_group)); return; }
-
+                    if (title.isEmpty()) {
+                        etTitle.setError(getString(R.string.title_new_group));
+                        return;
+                    }
                     int idx = 0;
                     String chosen = dropColor.getText().toString();
                     for (int i = 0; i < labels.length; i++) if (labels[i].equals(chosen)) { idx = i; break; }
                     int color = values[idx];
 
-                    // fromLang/toLang тимчасово порожні — ми їх ще не використовуємо
                     vm.add(title, "", "", color);
                 })
                 .setNegativeButton(android.R.string.cancel, null)

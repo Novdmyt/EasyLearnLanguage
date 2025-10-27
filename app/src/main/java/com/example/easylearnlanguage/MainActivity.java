@@ -14,8 +14,7 @@ import com.google.android.material.card.MaterialCardView;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -25,20 +24,28 @@ public class MainActivity extends AppCompatActivity {
         MaterialCardView tileCorrect   = findViewById(R.id.tile_correct);
         ImageButton      btnSettings   = findViewById(R.id.btn_settings);
 
-        // "Нова група" – список/створення груп
+        // "Нова група" – менеджер груп
         tileNewGroup.setOnClickListener(v ->
                 startActivity(new Intent(this, NewGroupActivity.class))
         );
 
-        // "Нові слова" – теж відкриває список груп; натискаєш потрібну -> відкриваються слова
-        tileNewWords.setOnClickListener(v ->
-                startActivity(new Intent(this, NewGroupActivity.class))
-        );
+        // "Нові слова" – вибір групи, потім WordsActivity
+        tileNewWords.setOnClickListener(v -> {
+            Intent it = new Intent(this, NewGroupActivity.class);
+            it.putExtra(NewGroupActivity.EXTRA_MODE, NewGroupActivity.MODE_WORDS);
+            startActivity(it);
+        });
 
-        // Поки заглушки
-        View.OnClickListener comingSoon = v ->
+        // "Грати" – вибір групи, після кліку запускається PlayActivity
+        tilePlay.setOnClickListener(v -> {
+            Intent it = new Intent(this, NewGroupActivity.class);
+            it.putExtra(NewGroupActivity.EXTRA_MODE, NewGroupActivity.MODE_PLAY);
+            startActivity(it);
+        });
+
+        // Заглушка для "Коригувати" (якщо ще не реалізовано)
+        View.OnClickListener comingSoon = vv ->
                 Toast.makeText(this, R.string.coming_soon, Toast.LENGTH_SHORT).show();
-        tilePlay.setOnClickListener(comingSoon);
         tileCorrect.setOnClickListener(comingSoon);
 
         btnSettings.setOnClickListener(v ->

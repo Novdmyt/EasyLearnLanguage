@@ -35,6 +35,8 @@
         <activity
             android:name=".ui.word.WordsActivity"
             android:exported="false"/>
+        <activity android:name=".ui.play.PlayActivity"
+            android:exported="false"/>
 
 
         <!-- (якщо вже створював) інші екрани без intent-filter -->
